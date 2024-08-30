@@ -1,13 +1,13 @@
 import {
     Column,
     CreateDateColumn,
-    Entity,
+    Entity, JoinColumn,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Users} from "./Users";
-import {MeasurementTypes} from "./MeasurementType";
+import {MeasurementTypeEnum} from "../models/MeasurementTypeEnum";
 
 @Entity()
 export class Measurements {
@@ -15,19 +15,23 @@ export class Measurements {
     id!: string;
 
     @ManyToOne(() => Users, (user) => user.code)
-    userCode!: number
-
-    @ManyToOne(() => MeasurementTypes, (type) => type.id)
-    type!: number;
+    @JoinColumn({ referencedColumnName: "code" })
+    user!: number
 
     @Column()
+    type: MeasurementTypeEnum;
+
+    @Column({nullable: true})
     value: string;
 
-    @Column()
+    @Column({nullable: true})
     imageUrl: string
 
-    @Column()
+    @Column({default: false})
     hasConfirmed: boolean;
+
+    @Column()
+    measurementDate: Date;
 
     @UpdateDateColumn()
     updatedAt!: Date;
@@ -35,9 +39,11 @@ export class Measurements {
     @CreateDateColumn()
     createdAt!: Date;
 
-    constructor(value: string, imageUrl: string, hasConfirmed: boolean) {
+    constructor(value: string, imageUrl: string, hasConfirmed: boolean, measurementDate: Date, type: MeasurementTypeEnum) {
         this.value = value;
         this.imageUrl = imageUrl;
         this.hasConfirmed = hasConfirmed;
+        this.measurementDate = measurementDate;
+        this.type = type;
     }
 }
