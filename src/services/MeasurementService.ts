@@ -17,6 +17,25 @@ export class MeasurementService {
 
         return count > 0;
     }
+
+    static async saveMeasurement(customer_code: number, measure_datetime: Date, measure_type: number){
+        try {
+            await UserService.createUser(customer_code);
+
+            return AppDataSource
+                .createQueryBuilder()
+                .insert()
+                .into(Measurements)
+                .values({
+                    user: customer_code,
+                    measurementDate: measure_datetime,
+                    type: measure_type
+                })
+                .execute()
+        } catch (e) {
+            console.error(e)
+        }
+    }
 }
 
 export default new MeasurementService();
