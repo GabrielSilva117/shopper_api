@@ -2,14 +2,14 @@ import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColu
 
 @Entity()
 export class Users {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
+    id!: string;
+
+    @Column({unique: true})
     code!: number;
 
     @Column({type: "varchar", length: 30})
     name: string;
-
-    @Column({unique: true, type: "varchar", length: 40})
-    email: string;
 
     @UpdateDateColumn()
     updatedAt!: Date;
@@ -19,6 +19,5 @@ export class Users {
 
     constructor(name: string, email: string) {
         this.name = name;
-        this.email = email;
     }
 }
