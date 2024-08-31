@@ -2,7 +2,7 @@ import {AppDataSource} from "../data-source";
 import {Users} from "../entities/Users";
 
 class UserService {
-    createUser (code: number) {
+    createUser (code: string) {
         try {
             return AppDataSource.createQueryBuilder()
                 .insert()

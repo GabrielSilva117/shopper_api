@@ -2,7 +2,6 @@ import { DataSource } from 'typeorm';
 import 'reflect-metadata';
 import {Users} from "./entities/Users";
 import {Measurements} from "./entities/Measuraments";
-import {MeasurementTypes} from "./entities/MeasurementType";
 
 export const AppDataSource = new DataSource({
     type: 'postgres',
@@ -13,7 +12,7 @@ export const AppDataSource = new DataSource({
     database: 'shopperapi',
     synchronize: true,
     logging: false,
-    entities: [Users, Measurements, MeasurementTypes],
+    entities: [Users, Measurements],
     migrations: [],
     subscribers: [],
 });
