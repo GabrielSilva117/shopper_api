@@ -16,7 +16,7 @@ export class Measurements {
 
     @ManyToOne(() => Users, (user) => user.code)
     @JoinColumn({ referencedColumnName: "code" })
-    user!: number
+    user!: string
 
     @Column()
     type: MeasurementTypeEnum;

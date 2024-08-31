@@ -6,7 +6,7 @@ export class Users {
     id!: string;
 
     @Column({unique: true})
-    code!: number;
+    code!: string;
 
     @Column({type: "varchar", length: 30})
     name: string;
@@ -17,7 +17,7 @@ export class Users {
     @CreateDateColumn()
     createdAt!: Date;
 
-    constructor(name: string, email: string) {
+    constructor(name: string) {
         this.name = name;
     }
 }
